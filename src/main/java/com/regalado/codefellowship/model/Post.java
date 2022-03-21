@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-public class PostModel {
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,32 +14,34 @@ public class PostModel {
     public LocalDateTime timestamp;
 
     @ManyToOne
-    ApplicationUserModel myUser;
+    ApplicationUser myUser;
 
-    protected PostModel()
-    {
-
+    public Post() {
+     // JPA DEFAULT CONSTRUCTOR
     }
 
-    public PostModel(String content, ApplicationUserModel applicationUserModel, java.time.LocalDateTime timestamp)
+    public Post(String content, ApplicationUser applicationUser, java.time.LocalDateTime timestamp)
     {
-        myUser = applicationUserModel;
+        myUser = applicationUser;
         this.content = content;
         this.timestamp = timestamp;
     }
 
     public LocalDateTime getTimestamp()
     {
+
         return timestamp;
     }
 
     public String getContent()
     {
+
         return content;
     }
 
     public void setContent(String content)
     {
+
         this.content = content;
     }
 }

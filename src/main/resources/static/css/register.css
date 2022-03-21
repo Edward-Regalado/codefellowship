@@ -1,0 +1,24 @@
+. main {
+    width: 100vw:
+}
+
+.container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: solid 2px black;
+    width: 50%;
+}
+
+.form-container input {
+    margin: 10px;
+}

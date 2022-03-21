@@ -1,30 +1,48 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/register.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Register</title>
 </head>
 <body>
-<header>
-    <h1>Sign Up</h1>
-</header>
 <main>
-    <form action="/signup" method="POST">
-        <label for="username">Username</label>
-        <input type="text" name="username">
-        <label for="firstName">firstName</label>
-        <input type="text" name="firstName">
-        <label for="lastName">lastName</label>
-        <input type="text" name="lastName">
-        <label for="bio">BIO</label>
-        <input type="textarea" name="bio">
-        <!--        <label for="dateOfBirth">Date of Birth</label>-->
-        <!--        <input type="text" name="dateOfBirth" placeholder="MM/DD/YYYY">-->
-        <label for="password">Password</label>
-        <input type="password" name="password">
-        <input type="submit" value="Sign Up">
-    </form>
+    <header>
+        <div th:replace="fragments/header :: div"></div>
+    </header>
+    <div class="container">
+        <div class="form-container">
+            <form action="/registration" method="POST">
+                <label for="username"></label>
+                <input type="text" name="username">
+                <small class="form-text text-muted">Username</small>
+                <br>
+                <label for="firstName"></label>
+                <input type="text" name="firstName">
+                <small class="form-text text-muted">First Name</small>
+                <br>
+                <label for="lastName"></label>
+                <input type="text" name="lastName">
+                <small class="form-text text-muted">Last Name</small>
+                <br>
+                <label for="bio"></label>
+                <input type="textarea" name="bio">
+                <small class="form-text text-muted">Bio</small>
+                <br>
+                <label for="password"></label>
+                <input type="password" name="password">
+                <small class="form-text text-muted">Password</small>
+                <br>
+                <button class="btn btn-primary" type="submit">Sign Up</button>
+            </form>
+        </div>
+    </div>
 </main>
 <footer>
 

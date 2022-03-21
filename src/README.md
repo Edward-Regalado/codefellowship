@@ -1,85 +1,52 @@
-# CodeFellowship Login
+# CodeFellowship
 
-## Overview
+## Overview 
 
+Build an app called Codefellowship that allows people learning to code to connect with each other and support each other on their coding journeys.
 
-## Setup
+## Lab 16: Spring
 
-- Create a new repo `codefellowship` to hold your work for the last 3 Spring labs. Use the Spring Initializr to set up an app with dependencies on `Web`, `Thymeleaf`, `JPA`, `Postgres`, and `Security` (and optionally DevTools for auto refresh of app on building). Remember to do your initial commit on the main branch before creating your feature branch. Also, see the below note about configuring Spring Security.
+### Feature Tasks
 
-Resources
-Spring Security cheat sheet
+- Build an app that allows users to log into `Codefellowship`
+    - The login page should have a link to a signup page
 
-## Feature Tasks
+- An `ApplicationUser` should have a `username`, `password` (will be hashed using BCrypt), `firstName`, `lastName`, `dateOfBirth`, `bio`, and any other fields you think are useful.
+  - All of these fields must be set at signup. They will not be editable at any other time.
 
-Build an app that allows users to log into CodeFellowship.
-
-- The site should have a login page.
-- The login page should have a link to a signup page.
-- An ApplicationUser should have a `username`, `password` (will be hashed using BCrypt), `firstName`, `lastName`, `dateOfBirth`, `bio`, and any other fields you think are useful.
-- All of these fields must be set at signup. They will not be editable at any other time.
 - The site should allow users to create an `ApplicationUser` on the “sign up” page.
-- Your Controller should have an `@Autowired` private `PasswordEncoder passwordEncoder;` and use that to run `passwordEncoder.encode(password)` before saving the password into the new user.
-- Using the cheat sheet above in “Resources”, add the ability for users to log in to your app.
+  - Your Controller should have an `@Autowired private PasswordEncoder passwordEncoder`; and use that to run `passwordEncoder.encode(password)` before saving the password into the new user.
+
 - The site should have a homepage at the root route (/) that contains basic information about the site.
-- This page should have links to login and signup if the user is NOT logged in.
-- This page should have a link to logout if the user IS logged in.
-- Ensure that `users` can log out and are redirected to the home page or login page.
-- When a `user` is logged in, the app should display the user’s username on every page (probably in the heading).
+  - This page should have links to login and signup if the user is NOT logged in.
+  - This page should have a link to logout if the user IS logged in.
+- Ensure that users can log out and are redirected to the home page or login page.
+- When a user is logged in, the app should display the user’s username on every page (probably in the heading).
 - Ensure that your homepage, login, and registration routes are accessible to non-logged in users.
 - The site should be well-styled and attractive.
 - The site should use templates to display its information.
 - Ensure that user registration also logs users into your app automatically.
 
-- **IMPORTANT**: A basic `WebSecurityConfig` file
-- To correctly configure Spring Security, please copy-paste this entire code snippet into a file called `WebSecurityConfig.java:`
+## Lab 17: Spring Authorization
 
-// TODO: put your package name here
+### Feature Tasks
 
-import com.mycode.securedemo.appuser.UserDetailsServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+- Allow users to log in to `CodeFellowship`, view user profiles, and create posts.
 
-@Configuration
-@EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+- Upon logging in, users should be taken to a `/myprofile` route that displays their information.
+  - This should include a default profile picture, which is the same for every user, and their basic information from ApplicationUser.
 
-    @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+- The site should have a page which allows viewing the data about a single `ApplicationUser`, at a route like /users/{id}. This should include a default profile picture, which is the same for every user, and their basic information.
+- Continue to ensure that your homepage, login, and registration routes are accessible to non-logged in users. All other routes should be limited to logged-in users.
+- Add a `Post` entity to your app.
+  - A `Post` has a `body` and a `createdAt` timestamp.
+- A logged-in user should be able to create a `Post`, and a post should belong to the user that created it.
+Hint: This is a relationship between two pieces of data
+- A user’s posts should be visible on their profile page.
+- The site should use reusable templates for its information. (At a minimum, it should have one Thymeleaf fragment that is used on multiple pages.)
+- The site should have a non-whitelabel error handling page that lets the user know, at minimum, the error code and a brief message about what went wrong.
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder;
-    }
 
-    @Override
-    protected void configure(final AuthenticationManagerBuilder authManagerBuilder) throws Exception {
-        authManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-    }
+## Lab 18: Spring Security Against User Input
 
-    @Override
-    protected void configure(final HttpSecurity http) throws Exception {
-        http
-            .cors().disable()
-            .csrf().disable()
-            .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/signup").permitAll()
-                .anyRequest().authenticated()
-            .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/")
-            .and()
-                .logout();
-                .logoutSuccessUrl("/login");
-    }
-}
+- work in progress.

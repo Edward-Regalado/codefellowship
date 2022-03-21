@@ -28,8 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     @Bean
     public PasswordEncoder passwordEncoder()
     {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder;
+        return new BCryptPasswordEncoder();
     }
 
     @Override
@@ -45,15 +44,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 .cors().disable()
                 .csrf().disable()
                 .authorizeRequests()
-                  .antMatchers("/").permitAll()
-                  .antMatchers("/user/{username}", "/login", "/registration").permitAll()
-                  .anyRequest().authenticated()
+                .antMatchers("/").permitAll()
+                .antMatchers("/css/**").permitAll()
+                .antMatchers("/images/**").permitAll()
+                .antMatchers("/user/{username}", "/login", "/registration").permitAll()
+                .anyRequest().authenticated()
                 .and()
-                  .formLogin()
-                  .loginPage("/login")
-                  .defaultSuccessUrl("/")
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/myprofile")
                 .and()
-                  .logout()
-                  .logoutSuccessUrl("/login");
+                .logout()
+                .logoutSuccessUrl("/login");
     }
 }

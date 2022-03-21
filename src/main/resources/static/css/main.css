@@ -1,0 +1,41 @@
+.profile-main {
+   display: flex;
+   flex-direction: row;
+   height: 100vh;
+   align-items: center;
+   align-content: center;
+   justify-content: center;
+   text-align: center;
+   border; 2px solid green;
+}
+
+.profile-container {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    border: 2px solid black;
+}
+
+.profile-post-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.profile-info img {
+    width: 200px;
+}
+
+.user-posts li {
+    margin: 10px;
+    font-family: "Sans-serif"
+}
+
+.login-container {
+    width: 50%;
+}
+
+.form-container {
+    width: 25%;
+}
