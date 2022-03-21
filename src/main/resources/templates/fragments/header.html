@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:ital@1&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="nav-container">
+        <div class="logo-container">
+            <a href="/"><h1>Codefellowship</h1></a>
+        </div>
+        <div class="nav-links-container">
+            <div class="nav-links">
+                <a class="navbar-brand" href="/">Home</a>
+                <a class="navbar-brand" href="/registration">Registration</a>
+                <a class="navbar-brand" href="/myprofile">Profile</a>
+<!--                <a class="navbar-brand" href="/all-users">All Users</a>-->
+                <a class="navbar-brand" th:if="${username != null}" href="/logout" >Log Out</a>
+                <a class="navbar-brand" th:if="${username == null}" href="/login" >Log In</a>
+            </div>
+            <div class="nav-current-user" th:if="${username}" th:text="${'Logged In As: ' + username}"></div>
+        </div>
+    </div>
+</body>
+</html>

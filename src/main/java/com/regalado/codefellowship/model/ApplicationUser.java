@@ -6,9 +6,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-public class ApplicationUserModel implements UserDetails
+public class ApplicationUser implements UserDetails
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,84 +19,105 @@ public class ApplicationUserModel implements UserDetails
     private String firstName;
     private String lastName;
     private String bio;
-    private String profileImage = "https://via.placeholder.com/150";
 
     @OneToMany(mappedBy = "myUser", cascade = CascadeType.ALL)
-    List<PostModel> userPosts;
+    List<Post> userPosts;
 
-    protected ApplicationUserModel() {
+//    @ManyToMany(mappedBy = "following")
+//    Set<ApplicationUser> users;
+//
+//    @ManyToMany
+//    @JoinTable(
+//            name="accounts_to_following",
+//            joinColumns = { @JoinColumn(name="account")},
+//            inverseJoinColumns = {@JoinColumn(name="following")}
+//    )
+//    Set<ApplicationUser> following;
+
+    protected ApplicationUser() {
+        // JPA DEFAULT METHOD
     }
 
-    public ApplicationUserModel(String username, String firstName, String lastName, String bio, String password) {
+    public ApplicationUser(String username, String firstName, String lastName, String bio, String password) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.bio = bio;
+
     }
 
+
+    public Long getId() {
+
+        return id;
+    }
+
+    public void setId(Long id) {
+
+        this.id = id;
+    }
+
+    @Override
+    public String getUsername() {
+
+        return username;
+    }
+
+
     public void setUsername(String username) {
+
         this.username = username;
     }
 
+    @Override
+    public String getPassword() {
+
+        return password;
+    }
     public void setPassword(String password) {
+
         this.password = password;
     }
 
     public String getFirstName() {
+
         return firstName;
     }
-
     public void setFirstName(String firstName) {
+
         this.firstName = firstName;
     }
-
     public String getLastName() {
+
         return lastName;
     }
-
     public void setLastName(String lastName) {
+
         this.lastName = lastName;
     }
 
-    public List<PostModel> getUserPosts() {
-
-        return userPosts;
-    }
-
-    public void setUserPosts(List<PostModel> userPosts) {
-        this.userPosts = userPosts;
-    }
-
     public String getBio() {
+
         return bio;
     }
-
     public void setBio(String bio) {
+
         this.bio = bio;
     }
 
-    public String getProfileImage() {
-        return profileImage;
-    }
+    public List<Post> getUserPosts() {
 
-    public void setProfileImage(String profileImage) {
-        this.profileImage = profileImage;
+        return userPosts;
+    }
+    public void setUserPosts(List<Post> userPosts) {
+
+        this.userPosts = userPosts;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
     }
 
     @Override

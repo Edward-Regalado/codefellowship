@@ -1,7 +1,7 @@
 package com.regalado.codefellowship.controller;
 
-import com.regalado.codefellowship.model.ApplicationUserModel;
-import com.regalado.codefellowship.model.PostModel;
+import com.regalado.codefellowship.model.ApplicationUser;
+import com.regalado.codefellowship.model.Post;
 import com.regalado.codefellowship.repository.ApplicationUserRepository;
 import com.regalado.codefellowship.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,18 +22,18 @@ public class PostController
     @Autowired
     PostRepository postRepository;
 
-    @PostMapping("/post")
-    public RedirectView createPost(String username, String content)
+    @PostMapping("/create-post")
+    public RedirectView createPost(String username, String body)
     {
-        ApplicationUserModel appUser = applicationUserRepository.findByUsername(username);
+        ApplicationUser newUser = applicationUserRepository.findByUsername(username);
         LocalDateTime timestamp = LocalDateTime.now();
-        PostModel newPost = new PostModel(content, appUser, timestamp);
-        List<PostModel> posts = appUser.getUserPosts();
+        Post newPost = new Post(body, newUser, timestamp);
+        List<Post> posts = newUser.getUserPosts();
         if(posts == null){
             posts = new ArrayList<>();
         }
         posts.add(newPost);
-        applicationUserRepository.save(appUser);
+        applicationUserRepository.save(newUser);
         String route = "/user/" + username;
         return new RedirectView(route);
     }
